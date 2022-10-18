@@ -1,7 +1,7 @@
-package wordcount;
+package wordCount;
 
-import mapreduce.MapReduceJob;
-import mapreduce.StringPartitioner;
+import mapReduce.MapReduceJob;
+import mapReduce.StringPartitioner;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 

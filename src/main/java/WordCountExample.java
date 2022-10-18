@@ -54,7 +54,7 @@ public class WordCountExample extends Configured implements Tool {
 		FileSystem fs = FileSystem.get(conf);
 		fs.delete(new Path(args[1]), true);
 
-		Job job = Job.getInstance(conf, "wordcount");
+		Job job = Job.getInstance(conf, "wordCount");
 		job.setJarByClass(WordCountExample.class);
 
 		job.setOutputKeyClass(Text.class);

@@ -1,4 +1,4 @@
-package inmapperCombiningWordcount;
+package inMapperCombiningWordCount;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
