@@ -1,11 +1,13 @@
 package mapreduce;
 
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 
-public class StringPartitioner extends Partitioner<String, Class> {
+public class StringPartitioner extends Partitioner<Text, IntWritable> {
     @Override
-    public int getPartition(String s, Class aClass, int numReduceTask) {
+    public int getPartition(Text s, IntWritable value, int numReduceTask) {
         if(numReduceTask == 1) return 0;
-        return Math.abs(s.hashCode()) % numReduceTask;
+        return Math.abs(s.toString().hashCode()) % numReduceTask;
     }
 }
