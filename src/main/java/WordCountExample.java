@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 public class WordCountExample extends Configured implements Tool {
 
 	public static class Map extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, IntWritable> {
-		private static final IntWritable ONE = new IntWritable(1);
+		private final IntWritable ONE = new IntWritable(1);
 		private final transient Text word = new Text();
 
 		@Override
