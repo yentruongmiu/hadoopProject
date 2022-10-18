@@ -10,9 +10,11 @@ bin/hadoop jar hadoopProject.jar Main <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <ou
 ## On IntelliJ Idea (only works with *unix OS)
 
 1. Create the configuration as picture
+
 ![img.png](img.png)
 
 2. Make sure the Java compiler is set up equivalent to the configuration
+
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 
