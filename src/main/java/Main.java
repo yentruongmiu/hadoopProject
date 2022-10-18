@@ -9,7 +9,7 @@ public class Main {
             return;
         }
 
-        MapReduceJob<?, ?, ?, ?> job = null;
+        MapReduceJob<?, ?, ?, ?, ?> job = null;
         //arguments: <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputPath> [<numReducers>]
         String jobName = args[0];
         switch (jobName) {
