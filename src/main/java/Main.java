@@ -1,4 +1,4 @@
-import inmappercombiningwordcount.InMapperCombiningWordCountJob;
+import inmapperCombiningWordcount.InMapperCombiningWordCountJob;
 import mapreduce.MapReduceJob;
 import org.apache.hadoop.util.ToolRunner;
 import wordcount.WordCountJob;

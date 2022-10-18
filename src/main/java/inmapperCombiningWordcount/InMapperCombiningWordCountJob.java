@@ -1,4 +1,4 @@
-package inmappercombiningwordcount;
+package inmapperCombiningWordcount;
 
 import mapreduce.MapReduceJob;
 import mapreduce.StringPartitioner;
