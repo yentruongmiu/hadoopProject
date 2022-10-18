@@ -1,3 +1,4 @@
+import inmappercombiningwordcount.InMapperCombiningWordCountJob;
 import mapreduce.MapReduceJob;
 import org.apache.hadoop.util.ToolRunner;
 import wordcount.WordCountJob;
@@ -18,6 +19,7 @@ public class Main {
                 break;
 
             case "p1b":
+                job = new InMapperCombiningWordCountJob("InMapperCombiningWordCountJob");
                 break;
 
             case "p1c":
