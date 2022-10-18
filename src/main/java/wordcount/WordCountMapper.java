@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
     private final static IntWritable one = new IntWritable(1);
 
+    @Override
     public void map(LongWritable key, Text value, Context context)
             throws IOException, InterruptedException {
 

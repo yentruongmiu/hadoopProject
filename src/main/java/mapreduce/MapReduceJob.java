@@ -15,7 +15,9 @@ import org.apache.hadoop.util.Tool;
 
 import java.io.IOException;
 
-public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, ?, ?>, K, V>
+public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
+        R extends Reducer<?, ?, ?, ?>,
+        K, V>
         extends Configured implements Tool {
 
     private final Job job;
@@ -39,7 +41,7 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, 
 
     @Override
     public int run(String[] strings) throws Exception {
-        //strings: 0, 1, 2
+        //strings: 0: jobName, 1: inputPath, 2: outputPath, 3: numReducers
         String inputPath = strings[1];
         String outputPath = strings[2];
 
@@ -52,6 +54,7 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, 
         Integer numReducers;
         if(strings.length == 4 ) {
             numReducers = Integer.parseInt(strings[3]);
+            job.setPartitionerClass(StringPartitioner.class);
         } else {
             numReducers = 1;
         }

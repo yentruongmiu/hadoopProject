@@ -4,7 +4,10 @@ import wordcount.WordCountJob;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("main");
+        if(args.length < 3) {
+            System.out.println("Enter command such as: bin/hadoop jar hadoopProject.jar Main <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputPath> [<numReducers>]");
+            return;
+        }
 
         MapReduceJob<?, ?, ?, ?> job = null;
         //arguments: <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputPath> [<numReducers>]
@@ -36,8 +39,8 @@ public class Main {
                 break;
         }
 
-        int result = ToolRunner.run(job, args);
+        int exitCode = ToolRunner.run(job, args);
 
-        System.exit(result);
+        System.exit(exitCode);
     }
 }
