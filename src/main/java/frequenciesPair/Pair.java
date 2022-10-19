@@ -1,4 +1,4 @@
-package frequenciesPairsComputing;
+package frequenciesPair;
 
 import java.io.DataInput;
 import java.io.DataOutput;

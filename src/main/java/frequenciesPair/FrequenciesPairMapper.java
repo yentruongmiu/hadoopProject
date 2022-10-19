@@ -1,4 +1,4 @@
-package frequenciesPairsComputing;
+package frequenciesPair;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class FrequenciesPairsComputingMapper extends Mapper<LongWritable, Text, Pair, IntWritable> {
+public class FrequenciesPairMapper extends Mapper<LongWritable, Text, Pair, IntWritable> {
 	private final IntWritable value1 = new IntWritable(1);
 
 	@Override
