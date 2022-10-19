@@ -80,11 +80,22 @@ public class Main {
 		String defaultArgs1 = args[1];
 		String defaultArgs2 = args[2];
 
-		for (int i = 1000; i <= 10000; i+= 1000) {
-			System.out.println(MessageFormat.format("=== Run P4 at: {0} ===", String.valueOf(i)));
+		for (int i = 1000; i <= 10000; i += 1000) {
 			args[1] = MessageFormat.format("{0}/{1}", defaultArgs1, String.valueOf(i));
-			args[2] = MessageFormat.format("{0}/{1}", defaultArgs2, String.valueOf(i));
-			exitCode = runTool(new FrequenciesPairsJob("P2_FrequenciesPairss"), args);
+
+			// output as P4/Pairs/{records}
+			System.out.println(MessageFormat.format("=== Run P4 Pairs at: {0} ===", String.valueOf(i)));
+			args[2] = MessageFormat.format("{0}/Pairs/{1}", defaultArgs2, String.valueOf(i));
+			exitCode = runTool(new FrequenciesPairsJob("P2_FrequenciesPairs"), args);
+
+			if (exitCode != 0) {
+				System.exit(exitCode);
+			}
+
+			// output as P4/Stripes/{records}
+			System.out.println(MessageFormat.format("=== Run P4 Stripes at: {0} ===", String.valueOf(i)));
+			args[2] = MessageFormat.format("{0}/Stripes/{1}", defaultArgs2, String.valueOf(i));
+			exitCode = runTool(new FrequenciesStripesJob("P3_FrequenciesStripes"), args);
 
 			if (exitCode != 0) {
 				System.exit(exitCode);
