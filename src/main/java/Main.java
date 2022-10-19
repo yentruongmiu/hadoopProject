@@ -1,5 +1,6 @@
 import averageComputing.AverageComputingJob;
 import frequenciesPair.FrequenciesPairJob;
+import frequenciesStripes.FrequenciesStripesJob;
 import inMapperCombiningAverageComputing.InMapperCombiningAverageComputingJob;
 import inMapperCombiningWordCount.InMapperCombiningWordCountJob;
 import mapReduce.MapReduceJob;
@@ -38,6 +39,7 @@ public class Main {
 				break;
 
 			case "p3":
+				job = new FrequenciesStripesJob("P3_FrequenciesStripes");
 				break;
 
 			case "p4":

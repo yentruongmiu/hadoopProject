@@ -20,21 +20,23 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
         String[] words = record.toString().split("[ \\-\"\']");
         Pattern pattern = Pattern.compile("^[A-Za-z]+[!,?.]*$", Pattern.CASE_INSENSITIVE);
 
-        for(String word : words) {
-            word = word.trim();
-            Matcher matcher = pattern.matcher(word);
-            if(matcher.find()) {
-                word = matcher.group().toLowerCase(Locale.ROOT);
-                String endingChar = String.valueOf(word.charAt(word.length() - 1));
+        if(words.length > 0) {
+            for (String word : words) {
+                word = word.trim();
+                Matcher matcher = pattern.matcher(word);
+                if (matcher.find()) {
+                    word = matcher.group().toLowerCase(Locale.ROOT);
+                    String endingChar = String.valueOf(word.charAt(word.length() - 1));
 
-                if(endingChar.equals(".") || endingChar.equals("!")
-                        || endingChar.equals(",") || endingChar.equals("?")) {
-                    word = word.substring(0, word.length() - 1);
+                    if (endingChar.equals(".") || endingChar.equals("!")
+                            || endingChar.equals(",") || endingChar.equals("?")) {
+                        word = word.substring(0, word.length() - 1);
+                    }
+                    Text text = new Text(word);
+                    context.write(text, one);
                 }
-                Text text = new Text(word);
-                context.write(text, one);
+                // not matcher.find() => empty string or other cases => not care
             }
-            // not matcher.find() => empty string or other cases => not care
         }
     }
 }

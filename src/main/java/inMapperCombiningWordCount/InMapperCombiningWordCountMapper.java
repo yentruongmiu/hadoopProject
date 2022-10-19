@@ -26,28 +26,30 @@ public class InMapperCombiningWordCountMapper extends Mapper<LongWritable, Text,
         String[] words = record.toString().split("[ \\-\"\']");
         Pattern pattern = Pattern.compile("^[A-Za-z]+[!,?.]*$", Pattern.CASE_INSENSITIVE);
 
-        for(String word : words) {
-            word = word.trim();
-            Matcher matcher = pattern.matcher(word);
-            if(matcher.find()) {
-                word = matcher.group().toLowerCase(Locale.ROOT);
-                String endingChar = String.valueOf(word.charAt(word.length() - 1));
+        if(words.length > 0) {
+            for (String word : words) {
+                word = word.trim();
+                Matcher matcher = pattern.matcher(word);
+                if (matcher.find()) {
+                    word = matcher.group().toLowerCase(Locale.ROOT);
+                    String endingChar = String.valueOf(word.charAt(word.length() - 1));
 
-                if(endingChar.equals(".") || endingChar.equals("!")
-                        || endingChar.equals(",") || endingChar.equals("?")) {
-                    word = word.substring(0, word.length() - 1);
+                    if (endingChar.equals(".") || endingChar.equals("!")
+                            || endingChar.equals(",") || endingChar.equals("?")) {
+                        word = word.substring(0, word.length() - 1);
+                    }
+                    Text text = new Text(word);
+                    if (groupPairs.containsKey(text)) {
+                        IntWritable value = groupPairs.get(text);
+                        Integer intValue = value.get() + 1;
+                        value.set(intValue);
+                        groupPairs.put(text, value);
+                    } else {
+                        groupPairs.put(text, new IntWritable(1));
+                    }
                 }
-                Text text = new Text(word);
-                if(groupPairs.containsKey(text)) {
-                    IntWritable value = groupPairs.get(text);
-                    Integer intValue = value.get() + 1;
-                    value.set(intValue);
-                    groupPairs.put(text, value);
-                } else {
-                    groupPairs.put(text, new IntWritable(1));
-                }
+                // not matcher.find() => empty string or other cases => not care
             }
-            // not matcher.find() => empty string or other cases => not care
         }
     }
 
