@@ -1,4 +1,4 @@
-package frequenciesPairsComputing;
+package frequenciesPair;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class FrequenciesPairsComputingReducer extends Reducer<Pair, IntWritable, Pair, DoubleWritable> {
+public class FrequenciesPairReducer extends Reducer<Pair, IntWritable, Pair, DoubleWritable> {
 	private int sum = 0;
 
 	@Override
