@@ -1,6 +1,19 @@
-# Development
+# HADOOP PROJECT
 
-## IntelliJ IDE (only works with *unix OS)
+## TEAM MEMBERS
+
+- Thi Hong Yen Truong
+- Tai Phong Lu
+
+## Github repos
+The same forks, different owners.
+
+- https://github.com/yentruongmiu/hadoopProject
+- https://github.com/phonglu-miu-edu/CS522-BD-Hadoop
+
+## Development
+
+### IntelliJ IDE (only works with *unix OS)
 
 Help us to run the Hadoop client without running the Hadoop system.
 
@@ -13,7 +26,7 @@ Help us to run the Hadoop client without running the Hadoop system.
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 
-# Deploy to hadoop
+## Deploy to hadoop
 
 1. Stay at the root of the project
 
@@ -98,15 +111,15 @@ wat     1
 zat     1
 ```
 
-# P4: Empirical Comparison
+## P4: Empirical Comparison
 The CPU, and Memory comparison of Pair, Stripe algorithms on the data in `input/P4` 
 
 ![img_3.png](img_3.png)
-# Requirements
+## Requirements
 
-## Part 1
+### Part 1
 
-### [3 points] Set up a single node cluster and optionally an IDE to create and test your programs.
+#### [3 points] Set up a single node cluster and optionally an IDE to create and test your programs.
 
 (a) Get WordCount (test run)
 
@@ -128,7 +141,7 @@ Use the data attached.   (After extracting you will get the log file and one ano
 
 For (a) - (d) you must submit java files, input files, output files.
 
-## PART 2 - 4
+### PART 2 - 4
 
 Next you will create `a crystal ball to predict events` that may happen once a certain event happened.
 
@@ -136,7 +149,7 @@ _Example: Amazon will say people who bought “item one” have bought the follo
 
 For the purpose of this project you can assume that historical customer data is available in the following form. <u>Each record contains the product IDs of all the product bought by one customer.</u>
 
-#### TEST DATA (You must use this for Part 2 and 3)
+##### TEST DATA (You must use this for Part 2 and 3)
 ```
 B76 C31 D76 A10 B76 C31 D76 C31 A10 B12 B76  A12 C31 D76 B12 C31 D76    // items bought by a customer, listed in the order she bought it
 D76 D76 B12 A10 C31 D76 B12  C31 D76 A12 C31 C31 D76 A12 B76 C31 D76  // items bought by another customer, listed in the order she bought it
@@ -149,16 +162,16 @@ Example: Let Data block be [a b c a d e]
 W(a) = {b, c}, W(b) = {c, a, d, e}, W(c) = {a, d, e}, W(a) ={d, e}, W(d) = {e}, W(e) = {}.
 ```
 
-### Part 2. Implement Pairs algorithm to compute relative frequencies.
+#### Part 2. Implement Pairs algorithm to compute relative frequencies.
 
 - **_[4 points]_** Create Java classes (.java files)
 - **_[1 points]_** Show input, output and batch file to execute your program at command line in Hadoop.
 
-### Part 3. Implement Stripes algorithm to compute relative frequencies.
+#### Part 3. Implement Stripes algorithm to compute relative frequencies.
 
 - **_[4 points]_** Create Java classes (.java files)
 - **_[1 points]_** Show input, output and batch file to execute your program at command line in Hadoop.
 
-### Part 4. Empirical Comparison
+#### Part 4. Empirical Comparison
 
 - **_[2 Points]_** Run the test data specific to your group and collect data on memory usage and time for both pair and stripe approach. Write your observations citing data.
