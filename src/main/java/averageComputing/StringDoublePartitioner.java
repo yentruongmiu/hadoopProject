@@ -1,4 +1,4 @@
-package mapReduce;
+package averageComputing;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;

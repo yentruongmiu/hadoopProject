@@ -5,6 +5,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Set;
@@ -13,13 +14,16 @@ import java.util.Set;
 public class FrequenciesStripesReducer extends
         Reducer<Text, Stripe, Text, Stripe> {
 
+    private Logger logger = Logger.getLogger(FrequenciesStripesReducer.class);
     @Override
     protected void reduce(Text u, Iterable<Stripe> values, Context context)
             throws IOException, InterruptedException {
+
         Stripe Hf = new Stripe();
-        int sum = 0;
+        Integer sum = 0;
         for(Stripe H : values) {
             Set<Writable> keys = H.keySet();
+            logger.info("keys of H:" + keys.toString());
             for(Writable key : keys) {
                 IntWritable kValue = (IntWritable) H.get(key);
                 if(Hf.containsKey(key)) {
@@ -32,18 +36,17 @@ public class FrequenciesStripesReducer extends
                 sum += kValue.get();
             }
         }
-
+        logger.info("SUM of u{" + u.toString() +"}:" + sum);
         Set<Writable> keys = Hf.keySet();
+        logger.info("keys of Hf:" + keys.toString());
         for(Writable key : keys) {
             IntWritable value = (IntWritable) Hf.get(key);
-            Hf.put(key, new DoubleWritable(value.get() / sum));
+            logger.info("value of Hf{" +key.toString()+"}:" + value.get());
+            Double frequency = (double)((double)value.get() / sum);
+            logger.info("fequency of H{" +key+"}:" + frequency);
+            Hf.put(key, new DoubleWritable(frequency));
         }
 
         context.write(u, Hf);
-
-        //for all stripe H in [H1,H2,...] do
-            //Hf = Hf + H
-        //s = Sum (Hf)
-        //Emit(u, Hf/s)
     }
 }

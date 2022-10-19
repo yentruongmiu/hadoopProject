@@ -1,7 +1,6 @@
 package averageComputing;
 
 import mapReduce.MapReduceJob;
-import mapReduce.StringDoublePartitioner;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 
