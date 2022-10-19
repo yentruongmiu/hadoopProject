@@ -2,6 +2,7 @@ package averageComputing;
 
 import accessLog.Parser;
 import accessLog.Record;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
