@@ -1,13 +1,8 @@
-# Running Application
+# Development
 
-## On Hadoop
+## IntelliJ IDE (only works with *unix OS)
 
-
-```bash
-bin/hadoop jar hadoopProject.jar <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputPath> [<numReducers>]
-```
-
-## On IntelliJ Idea (only works with *unix OS)
+Help us to run the Hadoop client without running the Hadoop system.
 
 1. Create the configuration as picture
 
@@ -18,6 +13,95 @@ bin/hadoop jar hadoopProject.jar <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputP
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 
+# Deploy to hadoop
+
+1. Stay at the root of the project
+
+2. (Optional) Clean the docker container
+```bash
+sh scripts/0_clean.sh
+```
+
+3. We will use the `sequenceiq/hadoop-docker:2.7.1` as the Hadoop Single Cluster. 
+This project will create the container name as `hadoop-2`.
+Run these commands in sequential order:
+```bash
+sh scripts/1_create_docker_container.sh
+
+sh scripts/2_copy_req_files.sh
+
+sh scripts/3_go_to_docker.sh
+```
+
+4. Now you are in the docker terminal, run this command to setup for this project
+```bash
+sh /usr/share/hadoop/4_in_docker_prepare.sh
+```
+
+5. Now you can execute the MapReduce for the requirements with these commands:
+```bash
+sh /usr/share/hadoop/4_in_docker_exec_p1a.sh
+sh /usr/share/hadoop/4_in_docker_exec_p1b.sh
+sh /usr/share/hadoop/4_in_docker_exec_p1c.sh
+sh /usr/share/hadoop/4_in_docker_exec_p1d.sh
+sh /usr/share/hadoop/4_in_docker_exec_p2.sh
+sh /usr/share/hadoop/4_in_docker_exec_p3.sh
+sh /usr/share/hadoop/4_in_docker_exec_p4.sh
+```
+
+(Optional)
+Manually, you can execute any job without above scripts using these commands:
+```bash
+(syntax)
+bin/hadoop jar hadoopProject.jar <p1a,p1b,p1c,p1d,p2,p3,p4> <inputPath> <outputPath> [<numReducers>]
+```
+
+For example:
+```bash
+Run the MapReduce Job for P1D)
+bin/hadoop jar hadoopProject.jar p1d project/input/P1D project/output/P1D
+
+(Show the output of the job)
+bin/hadoop fs -cat /user/root/project/output/P1D/*
+```
+
+
+6. The output of hadoop map reduce job will contain the metrics to show the resources usage, and the output of the job
+For example, after executed this script
+```bash
+sh /usr/share/hadoop/4_in_docker_exec_p1a.sh
+```
+
+We could get below information in console
+```
+=== JobId: job_1666212928729_0001 ===
+CPU: 3 s
+Memory: 1241 MB
+=====================================
+
+...
+
+cat     3
+fat     1
+lat     1
+oat     2
+rat     3
+jat     1
+mat     3
+pat     4
+sat     2
+bat     2
+eat     2
+hat     3
+kat     1
+wat     1
+zat     1
+```
+
+# P4: Empirical Comparison
+The CPU, and Memory comparison of Pair, Stripe algorithms on the data in `input/P4` 
+
+![img_3.png](img_3.png)
 # Requirements
 
 ## Part 1
