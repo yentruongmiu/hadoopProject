@@ -1,4 +1,4 @@
-package frequenciesPair;
+package frequenciesPairs;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
@@ -6,16 +6,16 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class FrequenciesPairReducer extends Reducer<Pair, IntWritable, Pair, DoubleWritable> {
+public class FrequenciesPairsReducer extends Reducer<FrequenciesPair, IntWritable, FrequenciesPair, DoubleWritable> {
 	private int sum = 0;
 
 	@Override
-	protected void setup(Reducer<Pair, IntWritable, Pair, DoubleWritable>.Context context) {
+	protected void setup(Reducer<FrequenciesPair, IntWritable, FrequenciesPair, DoubleWritable>.Context context) {
 		sum = 0;
 	}
 
 	@Override
-	protected void reduce(Pair key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+	protected void reduce(FrequenciesPair key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 		int total = 0;
 		for (IntWritable value : values) {
 			total += value.get();

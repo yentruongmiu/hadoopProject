@@ -1,0 +1,1 @@
+docker exec -it hadoop-2 /bin/bash

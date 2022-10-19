@@ -4,10 +4,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Partitioner;
-import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -18,7 +15,7 @@ import java.io.IOException;
 
 public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, ?, ?>, P extends Partitioner<?, ?>, K, V>
 	extends Configured implements Tool {
-
+	private static final long MEGABYTE = 1024L * 1024L;
 	private final Job job;
 
 	public MapReduceJob(String jobName, Class<M> mapper, Class<R> reducer, Class<P> partitioner,
@@ -62,6 +59,22 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, 
 			fs.delete(output, true);
 		}
 
-		return job.waitForCompletion(true) ? 0 : 1;
+		job.waitForCompletion(true);
+
+		showResourcesUsage();
+
+		return 0;
+	}
+
+	private void showResourcesUsage() throws IOException, InterruptedException {
+		Counters counters = job.getCounters();
+		long cpuMilliseconds = counters.findCounter(TaskCounter.CPU_MILLISECONDS).getValue();
+		long physicalMemoryBytes = counters.findCounter(TaskCounter.PHYSICAL_MEMORY_BYTES).getValue();
+		JobID jobId = job.getStatus().getJobID();
+
+		System.out.println("=== JobId: " + jobId + " ===");
+		System.out.println("CPU: " + (int) cpuMilliseconds / 1000 + " s");
+		System.out.println("Memory: " + (int) physicalMemoryBytes / MEGABYTE + " MB");
+		System.out.println("=====================================");
 	}
 }
