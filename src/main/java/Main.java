@@ -3,6 +3,7 @@ import inMapperCombiningAverageComputing.InMapperCombiningAverageComputingJob;
 import inMapperCombiningWordCount.InMapperCombiningWordCountJob;
 import mapReduce.MapReduceJob;
 import org.apache.hadoop.util.ToolRunner;
+import frequenciesPairsComputing.FrequenciesPairsComputingJob;
 import wordCount.WordCountJob;
 
 public class Main {
@@ -33,6 +34,7 @@ public class Main {
 				break;
 
 			case "p2":
+				job = new FrequenciesPairsComputingJob("P2_RelativeFrequenciesPairsAlgoComputing");
 				break;
 
 			case "p3":

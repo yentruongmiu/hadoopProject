@@ -15,11 +15,8 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 
-public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
-	R extends Reducer<?, ?, ?, ?>, P extends Partitioner<?, ?>,
-	K, V>
+public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, ?, ?>, P extends Partitioner<?, ?>, K, V>
 	extends Configured implements Tool {
 
 	private final Job job;
@@ -44,8 +41,8 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
 	@Override
 	public int run(String[] strings) throws Exception {
 		//strings: 0: jobName, 1: inputPath, 2: outputPath, 3: numReducers
-		String inputPath = MessageFormat.format("{0}/{1}", strings[1], job.getJobName());
-		String outputPath = MessageFormat.format("{0}/{1}", strings[2], job.getJobName());
+		String inputPath = strings[1];
+		String outputPath = strings[2];
 
 		Path input = new Path(inputPath);
 		Path output = new Path(outputPath);
@@ -54,12 +51,7 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
 		FileOutputFormat.setOutputPath(job, output);
 
 		//set default numReducers is 1;
-		Integer numReducers;
-		if (strings.length == 4 && Integer.parseInt(strings[3]) > 1) {
-			numReducers = Integer.parseInt(strings[3]);
-		} else {
-			numReducers = 1;
-		}
+		int numReducers = strings.length == 4 && Integer.parseInt(strings[3]) > 1 ? Integer.parseInt(strings[3]) : 1;
 		job.setNumReduceTasks(numReducers);
 
 		Configuration conf = getConf();
