@@ -101,7 +101,7 @@ zat     1
 # P4: Empirical Comparison
 The CPU, and Memory comparison of Pair, Stripe algorithms on the data in `input/P4` 
 
-![](Empirical Comparison.png)
+![img_3.png](img_3.png)
 # Requirements
 
 ## Part 1
