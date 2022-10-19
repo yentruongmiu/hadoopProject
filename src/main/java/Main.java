@@ -1,4 +1,5 @@
 import averageComputing.AverageComputingJob;
+import inMapperCombiningAverageComputing.InMapperCombiningAverageComputingJob;
 import inMapperCombiningWordCount.InMapperCombiningWordCountJob;
 import mapReduce.MapReduceJob;
 import org.apache.hadoop.util.ToolRunner;
@@ -28,6 +29,7 @@ public class Main {
 				break;
 
 			case "p1d":
+				job = new InMapperCombiningAverageComputingJob("P1D_InMapperCombiningAverageComputing");
 				break;
 
 			case "p2":

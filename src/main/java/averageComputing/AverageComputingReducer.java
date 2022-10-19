@@ -1,7 +1,6 @@
 package averageComputing;
 
 import org.apache.hadoop.io.DoubleWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -11,7 +10,7 @@ public class AverageComputingReducer extends
         Reducer<Text, DoubleWritable, Text, DoubleWritable> {
     @Override
     protected void reduce(Text word, Iterable<DoubleWritable> values, Context context) throws IOException, InterruptedException {
-        Double sum = 0D;
+        double sum = 0;
         int count = 0;
         for (DoubleWritable value : values) {
             sum += value.get();
