@@ -25,8 +25,6 @@ public class Parser {
                     Integer.parseInt(matcher.group(6)));
             return r;
         } else {
-            //System.out.println("not match");
-            logger.info("not match");
             return null;
         }
     }

@@ -16,6 +16,5 @@ public class InMapperCombiningAverageComputingJob extends
                 InMapperCombiningAverageComputingReducer.class,
                 StringDoublePartitioner.class, Text.class,
                 Pair.class);
-        logger.info("InMapperCombiningAverageComputingJob class");
     }
 }

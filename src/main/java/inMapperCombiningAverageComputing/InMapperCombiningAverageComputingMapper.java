@@ -20,14 +20,12 @@ public class InMapperCombiningAverageComputingMapper
     @Override
     protected void setup(Context context) throws IOException, InterruptedException{
         //do as initialize() method
-        logger.info("setup method in mapper class");
         groupPairs = new HashMap<>();
     }
 
     @Override
     protected void map(LongWritable key, Text record, Context context) throws IOException, InterruptedException {
         Record r = Parser.parserRecord(record);
-        //logger.info("map:" + r.getIpAddress() + ", qtt: " + r.getQuantity());
         if(r != null) {
             Text text = new Text(r.getIpAddress());
             Pair pair;
@@ -49,7 +47,6 @@ public class InMapperCombiningAverageComputingMapper
         //do as close() method
         for(Text key : groupPairs.keySet()) {
             Pair pair = groupPairs.get(key);
-            //logger.info("key:" + key.toString() + ", value: " + pair.toString());
             context.write(key, pair);
         }
     }
