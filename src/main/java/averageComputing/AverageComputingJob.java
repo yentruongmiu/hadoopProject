@@ -1,18 +1,18 @@
 package averageComputing;
 
 import mapReduce.MapReduceJob;
-import mapReduce.StringLongPartitioner;
-import org.apache.hadoop.io.LongWritable;
+import mapReduce.StringDoublePartitioner;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 
 import java.io.IOException;
 
 public class AverageComputingJob extends
-        MapReduceJob<AverageComputingMapper, AverageComputingReducer, StringLongPartitioner, Text, LongWritable> {
+        MapReduceJob<AverageComputingMapper, AverageComputingReducer, StringDoublePartitioner, Text, DoubleWritable> {
 
     public AverageComputingJob(String jobName) throws IOException {
         super(jobName, AverageComputingMapper.class,
                 AverageComputingReducer.class,
-                StringLongPartitioner.class, Text.class, LongWritable.class);
+                StringDoublePartitioner.class, Text.class, DoubleWritable.class);
     }
 }
