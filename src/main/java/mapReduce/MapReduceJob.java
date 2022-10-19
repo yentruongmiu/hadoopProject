@@ -15,23 +15,14 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 
-public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
-	R extends Reducer<?, ?, ?, ?>, P extends Partitioner<?, ?>, K, V>
+public class MapReduceJob<M extends Mapper<?, ?, ?, ?>, R extends Reducer<?, ?, ?, ?>, P extends Partitioner<?, ?>, K, V>
 	extends Configured implements Tool {
 
 	private final Job job;
-	private final String inputDirectory;
-	private final String outputDirectory;
 
 	public MapReduceJob(String jobName, Class<M> mapper, Class<R> reducer, Class<P> partitioner,
 						Class<K> outputKey, Class<V> outputValue) throws IOException {
-		this(jobName, mapper, reducer, partitioner, outputKey, outputValue, jobName, jobName);
-	}
-
-	public MapReduceJob(String jobName, Class<M> mapper, Class<R> reducer, Class<P> partitioner,
-			Class<K> outputKey, Class<V> outputValue, String inputDirectory, String outputDirectory) throws IOException {
 		Configuration conf = new Configuration();
 		job = Job.getInstance(conf, jobName);
 		job.setJarByClass(this.getClass());
@@ -45,16 +36,13 @@ public class MapReduceJob<M extends Mapper<?, ?, ?, ?>,
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
-
-		this.inputDirectory = inputDirectory;
-		this.outputDirectory = outputDirectory;
 	}
 
 	@Override
 	public int run(String[] strings) throws Exception {
 		//strings: 0: jobName, 1: inputPath, 2: outputPath, 3: numReducers
-		String inputPath = MessageFormat.format("{0}/{1}", strings[1], this.inputDirectory);
-		String outputPath = MessageFormat.format("{0}/{1}", strings[2], this.outputDirectory);
+		String inputPath = strings[1];
+		String outputPath = strings[2];
 
 		Path input = new Path(inputPath);
 		Path output = new Path(outputPath);

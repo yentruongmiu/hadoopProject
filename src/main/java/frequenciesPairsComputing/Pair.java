@@ -1,4 +1,4 @@
-package models;
+package frequenciesPairsComputing;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -8,11 +8,13 @@ import java.util.Objects;
 
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
+import org.jetbrains.annotations.Contract;
 
 public class Pair implements Writable, WritableComparable<Pair> {
 	private String left;
 	private String right;
 
+	@Contract(pure = true)
 	public Pair() {
 		super();
 	}
@@ -21,7 +23,10 @@ public class Pair implements Writable, WritableComparable<Pair> {
 		super();
 		this.left = left;
 		this.right = right;
+	}
 
+	public boolean isSpecialToken() {
+		return this.right.equals("*");
 	}
 
 	@Override
@@ -35,7 +40,6 @@ public class Pair implements Writable, WritableComparable<Pair> {
 		out.writeUTF(left);
 		out.writeUTF(right);
 	}
-
 
 	@Override
 	public int compareTo(Pair o) {

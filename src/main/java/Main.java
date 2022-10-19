@@ -32,7 +32,7 @@ public class Main {
 				break;
 
 			case "p2":
-				job = new FrequenciesPairsComputingJob("P2_RelativeFrequenciesPairsAlgoComputing", "P2_4", "P2");
+				job = new FrequenciesPairsComputingJob("P2_RelativeFrequenciesPairsAlgoComputing");
 				break;
 
 			case "p3":
