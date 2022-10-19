@@ -43,7 +43,7 @@ public class FrequenciesStripesReducer extends
             IntWritable value = (IntWritable) Hf.get(key);
             logger.info("value of Hf{" +key.toString()+"}:" + value.get());
             Double frequency = (double)((double)value.get() / sum);
-            logger.info("fequency of H{" +key+"}:" + frequency);
+            logger.info("frequency of H{" +key+"}:" + frequency);
             Hf.put(key, new DoubleWritable(frequency));
         }
 
