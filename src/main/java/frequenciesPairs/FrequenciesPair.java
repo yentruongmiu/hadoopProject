@@ -1,4 +1,7 @@
-package frequenciesPair;
+package frequenciesPairs;
+
+import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -6,25 +9,33 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Objects;
 
-import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.io.WritableComparable;
-
-public class Pair implements Writable, WritableComparable<Pair> {
+public class FrequenciesPair implements Writable, WritableComparable<FrequenciesPair> {
 	private String left;
 	private String right;
 
-	public Pair() {
+	/**
+	 * Required. DO NOT DELETE
+	 */
+	public FrequenciesPair() {
 		super();
 	}
 
-	public Pair(String left, String right) {
+	public FrequenciesPair(String left, String right) {
 		super();
 		this.left = left;
 		this.right = right;
 	}
 
+	public String getLeft() {
+		return this.left;
+	}
+
 	public boolean isSpecialToken() {
-		return this.right.equals("*");
+		return isSpecialToken(this.right);
+	}
+
+	public boolean isSpecialToken(String right) {
+		return right.equals("*");
 	}
 
 	@Override
@@ -40,13 +51,9 @@ public class Pair implements Writable, WritableComparable<Pair> {
 	}
 
 	@Override
-	public int compareTo(Pair o) {
+	public int compareTo(FrequenciesPair o) {
 		int k = this.left.compareTo(o.left);
-		if (k != 0) {
-			return k;
-		}
-
-		return this.right.compareTo(o.right);
+		return k == 0 ? this.right.compareTo(o.right) : k;
 	}
 
 	@Override
@@ -67,7 +74,7 @@ public class Pair implements Writable, WritableComparable<Pair> {
 		if (getClass() != obj.getClass())
 			return false;
 
-		Pair other = (Pair) obj;
+		FrequenciesPair other = (FrequenciesPair) obj;
 
 		if (left == null) {
 			if (other.left != null)
