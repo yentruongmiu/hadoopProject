@@ -1,10 +1,21 @@
 package inMapperCombiningAverageComputing;
 
-public class Pair {
+import org.apache.hadoop.io.Writable;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+public class Pair implements Writable {
     private Double key;
     private Integer value;
 
+    public Pair() {
+        super();
+    }
+
     public Pair(Double key, Integer value) {
+        super();
         this.key = key;
         this.value = value;
     }
@@ -28,5 +39,17 @@ public class Pair {
                 key +
                 ", " + value +
                 " >";
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeDouble(key);
+        out.writeInt(value);
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        key = in.readDouble();
+        value = in.readInt();
     }
 }

@@ -8,13 +8,11 @@ import java.util.Objects;
 
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
-import org.jetbrains.annotations.Contract;
 
 public class Pair implements Writable, WritableComparable<Pair> {
 	private String left;
 	private String right;
 
-	@Contract(pure = true)
 	public Pair() {
 		super();
 	}
