@@ -7,6 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -20,7 +21,7 @@ import java.util.StringTokenizer;
 
 public class WordCountExample extends Configured implements Tool {
 
-	public static class Map extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, IntWritable> {
+	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		private final IntWritable ONE = new IntWritable(1);
 		private final transient Text word = new Text();
 
