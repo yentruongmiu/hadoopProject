@@ -115,6 +115,12 @@ zat     1
 The CPU, and Memory comparison of Pair, Stripe algorithms on the data in `input/P4` 
 
 ![img_3.png](img_3.png)
+
+### Observation
+The Pair algorithm consumes more CPU than the Stripe algorithm. (CPU: Pair 0 - 1 Stripe)
+
+But it has the advantage that consumes less Memory than the Stripe algorithm. (Memory: Pair 1 - 0 Stripe)
+
 ## Requirements
 
 ### Part 1
