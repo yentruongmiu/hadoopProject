@@ -8,8 +8,7 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
-public class FrequenciesStripesMapper extends
-        Mapper<LongWritable, Text, Text, Stripe> {
+public class FrequenciesStripesMapper extends Mapper<LongWritable, Text, Text, Stripe> {
     private Logger logger = Logger.getLogger(FrequenciesStripesMapper.class);
     @Override
     protected void map(LongWritable key, Text record, Context context) throws IOException, InterruptedException {
@@ -30,9 +29,7 @@ public class FrequenciesStripesMapper extends
                     }
                 }
 
-                logger.info("==============Before Emit uKey and H==========");
                 Text uKey = new Text(words[i]);
-                logger.info("value of uKey " + words[i] + ":" + H.values().toString());
                 context.write(uKey, H);
             }
         }

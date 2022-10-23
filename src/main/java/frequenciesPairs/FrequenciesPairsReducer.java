@@ -15,7 +15,8 @@ public class FrequenciesPairsReducer extends Reducer<FrequenciesPair, IntWritabl
 	}
 
 	@Override
-	protected void reduce(FrequenciesPair key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+	protected void reduce(FrequenciesPair key, Iterable<IntWritable> values, Context context)
+			throws IOException, InterruptedException {
 		int total = 0;
 		for (IntWritable value : values) {
 			total += value.get();
